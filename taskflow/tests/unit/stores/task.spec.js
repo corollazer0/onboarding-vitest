@@ -111,4 +111,13 @@ describe('Task Store - Actions', () => {
     expect(result.title).toBe('Return task')
     expect(result.id).toBeDefined()
   })
+
+  it('toggleComplete는 태스크 완료 상태를 토글해야 한다', () => {
+    const store = useTaskStore()
+    store.tasks = [{ id: 1, title: 'Task', completed: false }]
+
+    store.toggleComplete(1)
+
+    expect(store.tasks[0].completed).toBe(true)
+  })
 })
