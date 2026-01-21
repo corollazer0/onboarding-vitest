@@ -5,7 +5,7 @@
       <p class="app__subtitle">Task management, step by step.</p>
     </header>
     <section class="app__content">
-      <p>Project scaffold is ready. Next: tasks list.</p>
+      <TaskList :tasks="tasks" />
     </section>
   </main>
 </template>
@@ -40,5 +40,12 @@
 </style>
 
 <script setup>
+import TaskList from './components/TaskList.vue'
+
 const title = import.meta.env.VITE_APP_TITLE || 'TaskFlow'
+const tasks = [
+  { id: 1, title: 'Set up project', completed: true },
+  { id: 2, title: 'Add TaskItem component', completed: true },
+  { id: 3, title: 'Wire TaskList in App.vue', completed: false }
+]
 </script>
