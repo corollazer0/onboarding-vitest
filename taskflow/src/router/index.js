@@ -1,4 +1,3 @@
-import { h } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
@@ -10,10 +9,7 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: {
-      name: 'AboutPlaceholder',
-      render: () => h('div', 'About')
-    }
+    component: () => import('@/views/AboutView.vue')
   }
 ]
 
