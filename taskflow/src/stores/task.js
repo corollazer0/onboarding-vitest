@@ -33,6 +33,12 @@ export const useTaskStore = defineStore('task', {
 
       this.tasks.push(newTask)
       return newTask
+    },
+    toggleComplete(taskId) {
+      const task = this.tasks.find((item) => item.id === taskId)
+      if (task) {
+        task.completed = !task.completed
+      }
     }
   }
 })
