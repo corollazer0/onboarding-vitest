@@ -1,10 +1,15 @@
 import { config } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
-import { beforeEach, vi } from 'vitest'
+import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest'
+import { server } from './mocks/server'
 
 beforeEach(() => {
   setActivePinia(createPinia())
 })
+
+beforeAll(() => server.listen())
+afterEach(() => server.resetHandlers())
+afterAll(() => server.close())
 
 vi.mock('@/api/client', () => ({
   default: {
