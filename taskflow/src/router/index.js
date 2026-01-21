@@ -9,16 +9,34 @@ const routes = [
   {
     path: '/about',
     name: 'About',
-    component: () => import('@/views/AboutView.vue')
+    component: () => import('@/views/AboutView.vue'),
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/tasks/:id',
     name: 'TaskDetail',
-    component: () => import('@/views/TaskDetailView.vue')
+    component: () => import('@/views/TaskDetailView.vue'),
+    meta: {
+      requiresAuth: true
+    }
   }
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes
 })
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = false
+
+  if (to.meta.requiresAuth && !isAuthenticated) {
+    next({ name: 'Home', query: { redirect: to.fullPath } })
+  } else {
+    next()
+  }
+})
+
+export default router
