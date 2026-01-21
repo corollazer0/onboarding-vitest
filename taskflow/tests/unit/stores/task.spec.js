@@ -120,4 +120,18 @@ describe('Task Store - Actions', () => {
 
     expect(store.tasks[0].completed).toBe(true)
   })
+
+  it('deleteTask는 태스크를 tasks 배열에서 제거해야 한다', () => {
+    const store = useTaskStore()
+    store.tasks = [
+      { id: 1, title: 'Task 1', completed: false },
+      { id: 2, title: 'Task 2', completed: true }
+    ]
+
+    store.deleteTask(1)
+
+    expect(store.tasks).toEqual([
+      { id: 2, title: 'Task 2', completed: true }
+    ])
+  })
 })
