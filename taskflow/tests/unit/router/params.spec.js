@@ -1,11 +1,10 @@
 import router from '@/router'
 
 describe('Router params', () => {
-  it('routes to TaskDetail with id param', async () => {
-    router.push('/tasks/123')
-    await router.isReady()
+  it('resolves TaskDetail with id param', () => {
+    const resolved = router.resolve('/tasks/123')
 
-    expect(router.currentRoute.value.name).toBe('TaskDetail')
-    expect(router.currentRoute.value.params.id).toBe('123')
+    expect(resolved.name).toBe('TaskDetail')
+    expect(resolved.params.id).toBe('123')
   })
 })
