@@ -4,13 +4,18 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/views/HomeView.vue')
+    component: () => import('@/views/HomeView.vue'),
+    meta: {
+      title: 'Home',
+      requiresAuth: false
+    }
   },
   {
     path: '/about',
     name: 'About',
     component: () => import('@/views/AboutView.vue'),
     meta: {
+      title: 'About',
       requiresAuth: false
     }
   },
@@ -19,6 +24,7 @@ const routes = [
     name: 'TaskDetail',
     component: () => import('@/views/TaskDetailView.vue'),
     meta: {
+      title: 'Task Detail',
       requiresAuth: true
     }
   }
@@ -45,5 +51,10 @@ export function createAuthGuard(options = {}) {
 
 const authGuard = createAuthGuard()
 router.beforeEach(authGuard)
+
+router.afterEach((to) => {
+  const baseTitle = import.meta.env.VITE_APP_TITLE || 'TaskFlow'
+  document.title = to.meta.title ? `${to.meta.title} | ${baseTitle}` : baseTitle
+})
 
 export default router
