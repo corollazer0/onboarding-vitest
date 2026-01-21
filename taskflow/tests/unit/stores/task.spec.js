@@ -87,3 +87,28 @@ describe('Task Store - Getters', () => {
     })
   })
 })
+
+describe('Task Store - Actions', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
+  it('addTask는 태스크를 tasks 배열에 추가해야 한다', () => {
+    const store = useTaskStore()
+
+    store.addTask('New task')
+
+    expect(store.tasks).toHaveLength(1)
+    expect(store.tasks[0].title).toBe('New task')
+    expect(store.tasks[0].completed).toBe(false)
+  })
+
+  it('addTask는 추가된 태스크를 반환해야 한다', () => {
+    const store = useTaskStore()
+
+    const result = store.addTask('Return task')
+
+    expect(result.title).toBe('Return task')
+    expect(result.id).toBeDefined()
+  })
+})
