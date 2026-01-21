@@ -4,5 +4,23 @@ export const useTaskStore = defineStore('task', {
   state: () => ({
     tasks: [],
     filter: 'all'
-  })
+  }),
+  getters: {
+    filteredTasks: (state) => {
+      switch (state.filter) {
+        case 'completed':
+          return state.tasks.filter((task) => task.completed)
+        case 'pending':
+          return state.tasks.filter((task) => !task.completed)
+        default:
+          return state.tasks
+      }
+    },
+    completedCount: (state) => {
+      return state.tasks.filter((task) => task.completed).length
+    },
+    getTaskById: (state) => {
+      return (id) => state.tasks.find((task) => task.id === id)
+    }
+  }
 })
