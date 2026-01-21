@@ -1,12 +1,10 @@
 <script setup>
 import TaskItem from './TaskItem.vue'
+import { storeToRefs } from 'pinia'
+import { useTaskStore } from '@/stores/task'
 
-defineProps({
-  tasks: {
-    type: Array,
-    required: true
-  }
-})
+const taskStore = useTaskStore()
+const { tasks } = storeToRefs(taskStore)
 </script>
 
 <template>

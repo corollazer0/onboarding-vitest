@@ -1,16 +1,21 @@
 import { mount } from '@vue/test-utils'
+import { createPinia, setActivePinia } from 'pinia'
 import TaskList from '@/components/TaskList.vue'
+import { useTaskStore } from '@/stores/task'
 
 describe('TaskList', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
   it('renders multiple tasks', () => {
-    const tasks = [
+    const store = useTaskStore()
+    store.tasks = [
       { id: 1, title: 'First task', completed: false },
       { id: 2, title: 'Second task', completed: true }
     ]
 
-    const wrapper = mount(TaskList, {
-      props: { tasks }
-    })
+    const wrapper = mount(TaskList)
 
     const items = wrapper.findAll('.task-item')
     expect(items).toHaveLength(2)
