@@ -4,8 +4,12 @@
       <h1 class="app__title">{{ title }}</h1>
       <p class="app__subtitle">Task management, step by step.</p>
     </header>
+    <nav class="app__nav">
+      <RouterLink to="/">Home</RouterLink>
+      <RouterLink to="/about">About</RouterLink>
+    </nav>
     <section class="app__content">
-      <TaskList />
+      <RouterView />
     </section>
   </main>
 </template>
@@ -37,10 +41,26 @@
   border-radius: 12px;
   background: #f5f7fa;
 }
+
+.app__nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.app__nav a {
+  color: #1f2933;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.app__nav a.router-link-active {
+  color: #1d4ed8;
+}
 </style>
 
 <script setup>
-import TaskList from './components/TaskList.vue'
+import { RouterLink, RouterView } from 'vue-router'
 
 const title = import.meta.env.VITE_APP_TITLE || 'TaskFlow'
 </script>
