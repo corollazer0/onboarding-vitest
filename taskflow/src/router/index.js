@@ -5,10 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: {
-      name: 'HomePlaceholder',
-      render: () => h('div', 'Home')
-    }
+    component: () => import('@/views/HomeView.vue')
   },
   {
     path: '/about',
