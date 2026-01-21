@@ -39,6 +39,9 @@ export const useTaskStore = defineStore('task', {
       if (task) {
         task.completed = !task.completed
       }
+    },
+    deleteTask(taskId) {
+      this.tasks = this.tasks.filter((task) => task.id !== taskId)
     }
   }
 })
