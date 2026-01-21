@@ -29,14 +29,21 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = false
+export function createAuthGuard(options = {}) {
+  const getIsAuthenticated = options.getIsAuthenticated ?? (() => false)
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    next({ name: 'Home', query: { redirect: to.fullPath } })
-  } else {
-    next()
+  return (to, from, next) => {
+    const isAuthenticated = getIsAuthenticated()
+
+    if (to.meta.requiresAuth && !isAuthenticated) {
+      next({ name: 'Home', query: { redirect: to.fullPath } })
+    } else {
+      next()
+    }
   }
-})
+}
+
+const authGuard = createAuthGuard()
+router.beforeEach(authGuard)
 
 export default router
