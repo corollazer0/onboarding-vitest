@@ -1,30 +1,44 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <main class="app">
+    <header class="app__header">
+      <h1 class="app__title">{{ title }}</h1>
+      <p class="app__subtitle">Task management, step by step.</p>
+    </header>
+    <section class="app__content">
+      <p>Project scaffold is ready. Next: tasks list.</p>
+    </section>
+  </main>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+.app {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  color: #1f2933;
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.app__title {
+  margin: 0 0 8px;
+  font-size: 32px;
+  font-weight: 700;
 }
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
+
+.app__subtitle {
+  margin: 0;
+  color: #52606d;
+}
+
+.app__content {
+  margin-top: 24px;
+  padding: 16px;
+  border: 1px solid #e4e7eb;
+  border-radius: 12px;
+  background: #f5f7fa;
 }
 </style>
+
+<script setup>
+const title = import.meta.env.VITE_APP_TITLE || 'TaskFlow'
+</script>
