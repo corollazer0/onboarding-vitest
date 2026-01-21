@@ -22,5 +22,17 @@ export const useTaskStore = defineStore('task', {
     getTaskById: (state) => {
       return (id) => state.tasks.find((task) => task.id === id)
     }
+  },
+  actions: {
+    addTask(title) {
+      const newTask = {
+        id: Date.now(),
+        title,
+        completed: false
+      }
+
+      this.tasks.push(newTask)
+      return newTask
+    }
   }
 })
