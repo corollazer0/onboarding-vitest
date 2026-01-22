@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { taskApi } from '@/api/task.api'
 
 export const useTaskStore = defineStore('task', {
   state: () => ({
@@ -25,23 +26,30 @@ export const useTaskStore = defineStore('task', {
   },
   actions: {
     addTask(title) {
-      const newTask = {
-        id: Date.now(),
+      const payload = {
         title,
         completed: false
       }
 
-      this.tasks.push(newTask)
-      return newTask
+      return taskApi.create(payload).then((response) => {
+        this.tasks.push(response.data)
+        return response.data
+      })
     },
     toggleComplete(taskId) {
       const task = this.tasks.find((item) => item.id === taskId)
       if (task) {
-        task.completed = !task.completed
+        const nextCompleted = !task.completed
+
+        return taskApi.update(taskId, { completed: nextCompleted }).then(() => {
+          task.completed = nextCompleted
+        })
       }
     },
     deleteTask(taskId) {
-      this.tasks = this.tasks.filter((task) => task.id !== taskId)
+      return taskApi.delete(taskId).then(() => {
+        this.tasks = this.tasks.filter((task) => task.id !== taskId)
+      })
     }
   }
 })
