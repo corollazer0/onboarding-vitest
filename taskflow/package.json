@@ -12,6 +12,7 @@
     "test": "vitest",
     "test:jsdom": "vitest --config vitest.config.js",
     "test:happy-dom": "vitest --config vitest.happy-dom.config.js",
+    "test:smoke": "npm run test:jsdom && npm run test:happy-dom",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch"
