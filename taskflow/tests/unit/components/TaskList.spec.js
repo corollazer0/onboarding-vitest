@@ -1,7 +1,7 @@
-import { mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import TaskList from '@/components/TaskList.vue'
 import { useTaskStore } from '@/stores/task'
+import { createWrapper } from '../../helpers/createWrapper'
 
 describe('TaskList', () => {
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('TaskList', () => {
       { id: 2, title: 'Second task', completed: true }
     ]
 
-    const wrapper = mount(TaskList)
+    const wrapper = createWrapper(TaskList)
 
     const items = wrapper.findAll('.task-item')
     expect(items).toHaveLength(2)

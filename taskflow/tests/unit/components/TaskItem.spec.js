@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils'
 import TaskItem from '@/components/TaskItem.vue'
+import { createWrapper } from '../../helpers/createWrapper'
 
 describe('TaskItem', () => {
   it('renders task title', () => {
-    const wrapper = mount(TaskItem, {
+    const wrapper = createWrapper(TaskItem, {
       props: {
         task: { id: 1, title: 'Sample task', completed: false }
       }

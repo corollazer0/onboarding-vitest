@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils'
 import BaseInput from '@/components/base/BaseInput.vue'
+import { createWrapper } from '../../../helpers/createWrapper'
 
 describe('BaseInput', () => {
   it('renders value and placeholder', () => {
-    const wrapper = mount(BaseInput, {
+    const wrapper = createWrapper(BaseInput, {
       props: { modelValue: 'Hello', placeholder: 'Type here' }
     })
 
@@ -12,7 +12,7 @@ describe('BaseInput', () => {
   })
 
   it('emits update when input changes', async () => {
-    const wrapper = mount(BaseInput, {
+    const wrapper = createWrapper(BaseInput, {
       props: { modelValue: '' }
     })
 
@@ -22,7 +22,7 @@ describe('BaseInput', () => {
   })
 
   it('applies invalid class when invalid is true', () => {
-    const wrapper = mount(BaseInput, {
+    const wrapper = createWrapper(BaseInput, {
       props: { invalid: true }
     })
 

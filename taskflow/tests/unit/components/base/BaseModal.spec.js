@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils'
 import BaseModal from '@/components/base/BaseModal.vue'
+import { createWrapper } from '../../../helpers/createWrapper'
 
 describe('BaseModal', () => {
   it('renders slot content when open', () => {
-    const wrapper = mount(BaseModal, {
+    const wrapper = createWrapper(BaseModal, {
       props: { isOpen: true },
       slots: { default: 'Modal content' }
     })
@@ -12,7 +12,7 @@ describe('BaseModal', () => {
   })
 
   it('does not render content when closed', () => {
-    const wrapper = mount(BaseModal, {
+    const wrapper = createWrapper(BaseModal, {
       props: { isOpen: false },
       slots: { default: 'Modal content' }
     })
@@ -21,7 +21,7 @@ describe('BaseModal', () => {
   })
 
   it('emits close when backdrop is clicked', async () => {
-    const wrapper = mount(BaseModal, {
+    const wrapper = createWrapper(BaseModal, {
       props: { isOpen: true }
     })
 
