@@ -1,19 +1,13 @@
 // @vitest-environment node
 
-describe('taskApi integration', () => {
-  let storage
+import { createLocalStorage } from '../helpers/createLocalStorage'
 
+describe('taskApi integration', () => {
   beforeEach(() => {
     vi.resetModules()
     vi.unmock('@/api/client')
     vi.unmock('@/api/task.api')
-    storage = new Map()
-    vi.stubGlobal('localStorage', {
-      getItem: (key) => (storage.has(key) ? storage.get(key) : null),
-      setItem: (key, value) => storage.set(key, value),
-      removeItem: (key) => storage.delete(key),
-      clear: () => storage.clear()
-    })
+    vi.stubGlobal('localStorage', createLocalStorage())
   })
 
   afterEach(() => {
