@@ -1,10 +1,10 @@
 import { config } from '@vue/test-utils'
-import { createPinia, setActivePinia } from 'pinia'
 import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest'
 import { server } from './mocks/server'
+import { createTestPinia } from './helpers/createTestPinia'
 
 beforeEach(() => {
-  setActivePinia(createPinia())
+  createTestPinia()
 })
 
 beforeAll(() => server.listen())

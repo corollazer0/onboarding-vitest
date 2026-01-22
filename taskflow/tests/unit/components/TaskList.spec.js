@@ -1,11 +1,11 @@
-import { createPinia, setActivePinia } from 'pinia'
 import TaskList from '@/components/TaskList.vue'
 import { useTaskStore } from '@/stores/task'
 import { createWrapper } from '../../helpers/createWrapper'
+import { createTestPinia } from '../../helpers/createTestPinia'
 
 describe('TaskList', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    createTestPinia()
   })
 
   it('renders multiple tasks', () => {

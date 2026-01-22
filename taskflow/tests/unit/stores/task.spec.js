@@ -1,6 +1,6 @@
-import { createPinia, setActivePinia } from 'pinia'
 import { taskApi } from '@/api/task.api'
 import { useTaskStore } from '@/stores/task'
+import { createTestPinia } from '../../helpers/createTestPinia'
 
 vi.mock('@/api/task.api', () => ({
   taskApi: {
@@ -12,7 +12,7 @@ vi.mock('@/api/task.api', () => ({
 
 describe('Task Store - State', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    createTestPinia()
   })
 
   it('초기 tasks는 빈 배열이어야 한다', () => {
@@ -28,7 +28,7 @@ describe('Task Store - State', () => {
 
 describe('Task Store - Getters', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    createTestPinia()
   })
 
   it('필터가 all이면 모든 태스크를 반환해야 한다', () => {
@@ -99,7 +99,7 @@ describe('Task Store - Getters', () => {
 
 describe('Task Store - Actions', () => {
   beforeEach(() => {
-    setActivePinia(createPinia())
+    createTestPinia()
     taskApi.create.mockReset()
     taskApi.update.mockReset()
     taskApi.delete.mockReset()
