@@ -10,6 +10,8 @@ describe('request interceptor', () => {
     const apiClient = await loadApiClient()
 
     const config = await apiClient.interceptors.request.handlers[0].fulfilled({
+      method: 'get',
+      url: '/tasks',
       headers: {}
     })
 
@@ -21,6 +23,8 @@ describe('request interceptor', () => {
     const apiClient = await loadApiClient()
 
     const config = await apiClient.interceptors.request.handlers[0].fulfilled({
+      method: 'get',
+      url: '/tasks',
       headers: {}
     })
 
