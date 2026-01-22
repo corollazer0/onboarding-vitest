@@ -8,7 +8,7 @@ describe('TaskList', () => {
     createTestPinia()
   })
 
-  it('renders multiple tasks', () => {
+  it('여러 개의 태스크를 렌더링해야 한다', () => {
     const store = useTaskStore()
     store.tasks = [
       { id: 1, title: 'First task', completed: false },

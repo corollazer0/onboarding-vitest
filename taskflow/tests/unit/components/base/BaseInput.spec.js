@@ -2,7 +2,7 @@ import BaseInput from '@/components/base/BaseInput.vue'
 import { createWrapper } from '../../../helpers/createWrapper'
 
 describe('BaseInput', () => {
-  it('renders value and placeholder', () => {
+  it('값과 placeholder를 렌더링해야 한다', () => {
     const wrapper = createWrapper(BaseInput, {
       props: { modelValue: 'Hello', placeholder: 'Type here' }
     })
@@ -11,7 +11,7 @@ describe('BaseInput', () => {
     expect(wrapper.attributes('placeholder')).toBe('Type here')
   })
 
-  it('emits update when input changes', async () => {
+  it('입력이 변경되면 update 이벤트를 emit해야 한다', async () => {
     const wrapper = createWrapper(BaseInput, {
       props: { modelValue: '' }
     })
@@ -21,7 +21,7 @@ describe('BaseInput', () => {
     expect(wrapper.emitted('update:modelValue')[0]).toEqual(['New value'])
   })
 
-  it('applies invalid class when invalid is true', () => {
+  it('invalid가 true면 invalid 클래스를 적용해야 한다', () => {
     const wrapper = createWrapper(BaseInput, {
       props: { invalid: true }
     })

@@ -14,7 +14,7 @@ describe('taskApi integration', () => {
     vi.unstubAllGlobals()
   })
 
-  it('fetches tasks from MSW', async () => {
+  it('MSW로부터 태스크를 가져와야 한다', async () => {
     const { taskApi } = await import('@/api/task.api')
     const response = await taskApi.getAll()
 
@@ -22,7 +22,7 @@ describe('taskApi integration', () => {
     expect(response.data[0].title).toBe('Task 1')
   })
 
-  it('creates a task via MSW', async () => {
+  it('MSW를 통해 태스크를 생성해야 한다', async () => {
     const { taskApi } = await import('@/api/task.api')
     const payload = { title: 'New task', completed: false }
     const response = await taskApi.create(payload)

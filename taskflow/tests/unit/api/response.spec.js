@@ -16,7 +16,7 @@ describe('response interceptor', () => {
     vi.unstubAllGlobals()
   })
 
-  it('clears token and redirects on 401', async () => {
+  it('401이면 토큰을 삭제하고 /login으로 이동해야 한다', async () => {
     localStorage.setItem('token', 'test-token')
     vi.stubGlobal('location', { href: '' })
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -32,7 +32,7 @@ describe('response interceptor', () => {
     expect(globalThis.location.href).toBe('/login')
   })
 
-  it('logs network error when response is missing', async () => {
+  it('response가 없으면 네트워크 에러를 로그해야 한다', async () => {
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
     const apiClient = await loadApiClient()
     const error = {}

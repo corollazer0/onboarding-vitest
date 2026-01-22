@@ -460,6 +460,7 @@ describe('BaseButton', () => {
 | 56 | config: happy-dom test environment | add happy-dom dependency, env setup | 1h |
 | 57 | config: split jsdom/happy-dom tests | env-specific config/scripts | 2h |
 | 58 | test: happy-dom localStorage | use real localStorage in happy-dom | 2h |
+| 59 | test: localize test names + helper/mocks comments | add Korean comments and rename it() titles | 2h |
 
 ---
 
