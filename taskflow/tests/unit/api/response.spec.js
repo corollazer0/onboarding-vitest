@@ -1,9 +1,9 @@
+import { loadApiClient } from '../../helpers/loadApiClient'
+
 describe('response interceptor', () => {
   let consoleErrorSpy
 
   beforeEach(() => {
-    vi.resetModules()
-    vi.unmock('@/api/client')
     vi.unstubAllGlobals()
     localStorage.clear()
   })
@@ -21,7 +21,7 @@ describe('response interceptor', () => {
     vi.stubGlobal('location', { href: '' })
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
-    const { default: apiClient } = await import('@/api/client')
+    const apiClient = await loadApiClient()
     const error = { response: { status: 401 } }
 
     await expect(
@@ -34,7 +34,7 @@ describe('response interceptor', () => {
 
   it('logs network error when response is missing', async () => {
     consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-    const { default: apiClient } = await import('@/api/client')
+    const apiClient = await loadApiClient()
     const error = {}
 
     await expect(

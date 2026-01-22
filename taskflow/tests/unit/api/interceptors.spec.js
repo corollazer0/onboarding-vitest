@@ -1,13 +1,13 @@
+import { loadApiClient } from '../../helpers/loadApiClient'
+
 describe('request interceptor', () => {
   beforeEach(() => {
-    vi.resetModules()
-    vi.unmock('@/api/client')
     localStorage.clear()
   })
 
   it('adds Authorization header when token exists', async () => {
     localStorage.setItem('token', 'test-token')
-    const { default: apiClient } = await import('@/api/client')
+    const apiClient = await loadApiClient()
 
     const config = await apiClient.interceptors.request.handlers[0].fulfilled({
       headers: {}
@@ -18,7 +18,7 @@ describe('request interceptor', () => {
   })
 
   it('does not add Authorization header when token is missing', async () => {
-    const { default: apiClient } = await import('@/api/client')
+    const apiClient = await loadApiClient()
 
     const config = await apiClient.interceptors.request.handlers[0].fulfilled({
       headers: {}
