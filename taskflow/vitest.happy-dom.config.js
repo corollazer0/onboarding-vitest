@@ -5,7 +5,8 @@ export default mergeConfig(
   baseConfig,
   defineConfig({
     test: {
-      environment: 'happy-dom'
+      environment: 'happy-dom',
+      include: ['tests/happy-dom/**/*.spec.js']
     }
   })
 )

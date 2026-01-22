@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx --fix",
     "format": "prettier --write src/",
     "test": "vitest",
+    "test:jsdom": "vitest --config vitest.config.js",
+    "test:happy-dom": "vitest --config vitest.happy-dom.config.js",
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest --watch"

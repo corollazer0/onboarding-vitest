@@ -9,6 +9,7 @@ export default mergeConfig(
       globals: true,
       setupFiles: ['./tests/setup.js'],
       include: ['tests/**/*.spec.js'],
+      exclude: ['tests/happy-dom/**/*.spec.js'],
       coverage: {
         provider: 'v8',
         reporter: ['text', 'json', 'html'],
