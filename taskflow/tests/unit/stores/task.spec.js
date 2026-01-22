@@ -1,5 +1,14 @@
 import { createPinia, setActivePinia } from 'pinia'
+import { taskApi } from '@/api/task.api'
 import { useTaskStore } from '@/stores/task'
+
+vi.mock('@/api/task.api', () => ({
+  taskApi: {
+    create: vi.fn(),
+    update: vi.fn(),
+    delete: vi.fn()
+  }
+}))
 
 describe('Task Store - State', () => {
   beforeEach(() => {
@@ -91,44 +100,55 @@ describe('Task Store - Getters', () => {
 describe('Task Store - Actions', () => {
   beforeEach(() => {
     setActivePinia(createPinia())
+    taskApi.create.mockReset()
+    taskApi.update.mockReset()
+    taskApi.delete.mockReset()
   })
 
-  it('addTask는 태스크를 tasks 배열에 추가해야 한다', () => {
+  it('addTask는 태스크를 tasks 배열에 추가해야 한다', async () => {
     const store = useTaskStore()
+    taskApi.create.mockResolvedValue({
+      data: { id: 1, title: 'New task', completed: false }
+    })
 
-    store.addTask('New task')
+    await store.addTask('New task')
 
     expect(store.tasks).toHaveLength(1)
     expect(store.tasks[0].title).toBe('New task')
     expect(store.tasks[0].completed).toBe(false)
   })
 
-  it('addTask는 추가된 태스크를 반환해야 한다', () => {
+  it('addTask는 추가된 태스크를 반환해야 한다', async () => {
     const store = useTaskStore()
+    taskApi.create.mockResolvedValue({
+      data: { id: 2, title: 'Return task', completed: false }
+    })
 
-    const result = store.addTask('Return task')
+    const result = await store.addTask('Return task')
 
     expect(result.title).toBe('Return task')
     expect(result.id).toBeDefined()
   })
 
-  it('toggleComplete는 태스크 완료 상태를 토글해야 한다', () => {
+  it('toggleComplete는 태스크 완료 상태를 토글해야 한다', async () => {
     const store = useTaskStore()
     store.tasks = [{ id: 1, title: 'Task', completed: false }]
+    taskApi.update.mockResolvedValue({ data: { success: true } })
 
-    store.toggleComplete(1)
+    await store.toggleComplete(1)
 
     expect(store.tasks[0].completed).toBe(true)
   })
 
-  it('deleteTask는 태스크를 tasks 배열에서 제거해야 한다', () => {
+  it('deleteTask는 태스크를 tasks 배열에서 제거해야 한다', async () => {
     const store = useTaskStore()
     store.tasks = [
       { id: 1, title: 'Task 1', completed: false },
       { id: 2, title: 'Task 2', completed: true }
     ]
+    taskApi.delete.mockResolvedValue({ data: { success: true } })
 
-    store.deleteTask(1)
+    await store.deleteTask(1)
 
     expect(store.tasks).toEqual([
       { id: 2, title: 'Task 2', completed: true }
