@@ -457,6 +457,9 @@ describe('BaseButton', () => {
 | 53 | 🧪 test: TaskForm 통합 테스트 | 폼 제출, 유효성 검사 | 3h |
 | 54 | 🔄 refactor: 테스트 헬퍼 함수 추출 | 테스트 유틸리티 모듈화 | 2h |
 | 55 | 📝 docs: 테스트 패턴 문서화 | 팀 테스트 가이드 작성 | 2h |
+| 56 | config: happy-dom test environment | add happy-dom dependency, env setup | 1h |
+| 57 | config: split jsdom/happy-dom tests | env-specific config/scripts | 2h |
+| 58 | test: happy-dom localStorage | use real localStorage in happy-dom | 2h |
 
 ---
 
